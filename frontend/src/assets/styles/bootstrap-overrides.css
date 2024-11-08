@@ -1,0 +1,20 @@
+/* 修改 Bootstrap 按鈕樣式 */
+.btn-primary {
+    background-color: #007bff !important; /* 強制修改主按鈕背景顏色為Bootstrap藍色 (#007bff) */
+    border-color: #007bff !important; /* 強制修改按鈕邊框顏色為相同的藍色 */
+    border-radius: 8px; /* 增加按鈕圓角，使按鈕看起來更柔和 */
+    font-weight: bold; /* 設置按鈕文字為加粗，增加可讀性 */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3 !important; /* 修改鼠標懸停時的按鈕背景顏色，使顏色變深，強調交互 */
+    border-color: #0056b3 !important; /* 修改懸停時的邊框顏色，使其與背景顏色匹配 */
+}
+
+/* 修改表單元素的樣式 */
+.form-control {
+    border-radius: 6px; /* 設置表單輸入框的圓角，讓其看起來更柔和 */
+    padding: 10px; /* 增加內邊距，讓輸入框有更多空間，使其更易於輸入 */
+}
+
+

@@ -1,0 +1,43 @@
+/* CSS 重置樣式表 */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0; /* 移除所有元素的默認外邊距 */
+    padding: 0; /* 移除所有元素的默認內邊距 */
+    border: 0; /* 移除所有元素的默認邊框 */
+    font-size: 100%; /* 重置字體大小，使其與默認大小一致 */
+    font: inherit; /* 繼承父元素的字體設置 */
+    vertical-align: baseline; /* 重置行內元素的垂直對齊方式，保持基線對齊 */
+}
+
+/* 設置所有元素的框模型為 border-box，方便布局控制 */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* 預設的列表樣式和圖片調整 */
+ol, ul {
+    list-style: none; /* 移除有序和無序列表的默認符號樣式 */
+}
+
+img {
+    max-width: 100%; /* 限制圖片最大寬度不超過父元素的寬度，避免超出容器導致布局錯亂 */
+    height: auto; /* 保持圖片的縱橫比 */
+    display: block; /* 設置圖片為塊級元素，去掉圖片底部的空隙（默認圖片是行內元素） */
+}
+
+/* 表格的預設樣式 */
+table {
+    border-collapse: collapse; /* 合併相鄰單元格邊框，減少表格的空隙 */
+    border-spacing: 0; /* 設置表格單元格之間的間距為0 */
+}

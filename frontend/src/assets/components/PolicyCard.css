@@ -1,11 +1,10 @@
-/* PolicyCard.css - 定義保單卡片的樣式 */
-
 .policy-card {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .policy-card h3 {
@@ -28,6 +27,8 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
 }
 
 .edit-button {
@@ -47,4 +48,9 @@
 
 .delete-button:hover {
     background-color: #c82333;
+}
+
+.policy-card:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }

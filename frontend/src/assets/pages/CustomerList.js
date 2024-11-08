@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../assets/context/AuthContext';
 import './CustomerList.css';
 import AddCustomerModal from '../modals/AddCustomerModal';
 import EditCustomerModal from '../modals/EditCustomerModal';
@@ -7,56 +9,76 @@ function CustomerList() {
     const [customers, setCustomers] = useState([]);
     const [isAddModalOpen, setAddModalOpen] = useState(false);
     const [editCustomer, setEditCustomer] = useState(null);
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // 獲取 token
-        const token = localStorage.getItem('token');
+        if (!user) {
+            navigate('/login');
+            return;
+        }
 
-        fetch('/api/customers', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // 添加 Authorization Header
-            }
-        })
-            .then(response => {
-                if (!response.ok) {
+        if (user && user.token) {
+            fetchCustomers(user.token);
+        }
+    }, [user, navigate]);
+
+    // 從 API 獲取客戶列表的函數
+    const fetchCustomers = async (token) => {
+        try {
+            const response = await fetch('/api/customers', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (!response.ok) {
+                if (response.status === 401) {
+                    alert('您的會話已過期，請重新登錄');
+                    navigate('/login');
+                } else {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
-            })
-            .then(data => setCustomers(data.customers || []))
-            .catch(error => console.error('Error fetching customers:', error));
-    }, []);
+            }
+            const data = await response.json();
+            setCustomers(data.customers || []);
+        } catch (error) {
+            console.error('Error fetching customers:', error);
+        }
+    };
 
+    // 處理添加客戶
     const handleAddCustomer = (customer) => {
         setCustomers([...customers, customer]);
         setAddModalOpen(false);
     };
 
+    // 處理更新客戶
     const handleEditCustomer = (updatedCustomer) => {
         setCustomers(customers.map(c => c.id === updatedCustomer.id ? updatedCustomer : c));
         setEditCustomer(null);
     };
 
+    // 處理刪除客戶
     const handleDeleteCustomer = (id) => {
-        // 獲取 token
-        const token = localStorage.getItem('token');
-
-        fetch(`/api/customers/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}` // 添加 Authorization Header
-            }
-        })
-            .then(response => {
-                if (response.ok) {
-                    setCustomers(customers.filter(c => c.id !== id));
-                } else {
-                    console.error('Failed to delete customer');
+        const token = user ? user.token : null;
+        if (window.confirm("確定要刪除此客戶嗎？")) {
+            fetch(`/api/customers/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
             })
-            .catch(error => console.error('Error deleting customer:', error));
+                .then(response => {
+                    if (response.ok) {
+                        setCustomers(customers.filter(c => c.id !== id));
+                    } else {
+                        console.error('Failed to delete customer');
+                    }
+                })
+                .catch(error => console.error('Error deleting customer:', error));
+        }
     };
 
     return (
@@ -93,10 +115,12 @@ function CustomerList() {
                 </tbody>
             </table>
 
+            {/* 新增客戶模態框 */}
             {isAddModalOpen && (
                 <AddCustomerModal onClose={() => setAddModalOpen(false)} onCustomerAdded={handleAddCustomer} />
             )}
 
+            {/* 編輯客戶模態框 */}
             {editCustomer && (
                 <EditCustomerModal
                     customer={editCustomer}

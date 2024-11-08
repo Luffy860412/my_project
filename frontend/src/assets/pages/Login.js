@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../assets/context/AuthContext';
 import './Login.css';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate(); // 導航在組件內部處理
 
-    // 處理登入邏輯
     const handleLogin = async () => {
         try {
             const response = await fetch('/api/auth/login', {
@@ -21,16 +22,9 @@ function Login() {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log('登入成功:', data);
-
-                // 存儲 token
-                localStorage.setItem('token', data.token);
-
-                // 重設錯誤訊息
+                login(data); // 調用 login 函數
                 setError(null);
-
-                // 導航至主頁或其他頁面
-                navigate('/home');
+                navigate('/home'); // 成功登入後導航
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || '登入失敗');
@@ -44,10 +38,8 @@ function Login() {
     return (
         <div className="login-container">
             <h2>登入 OneCRM</h2>
-
             <div className="login-form">
                 {error && <p className="error-message">{error}</p>}
-
                 <label>用戶名:</label>
                 <input
                     type="text"
@@ -55,16 +47,13 @@ function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                     autoFocus
                 />
-
                 <label>密碼:</label>
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-
                 <button onClick={handleLogin} className="login-button">登入</button>
-
                 <Link to="/signup" className="signup-link">註冊</Link>
             </div>
         </div>

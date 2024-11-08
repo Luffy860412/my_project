@@ -1,30 +1,62 @@
-import React from 'react'; // 引入 React，用於創建組件
-import { Link } from 'react-router-dom'; // 引入 Link，用於頁面導航
-import './Home.css'; // 引入 Home.css，用於設置首頁的樣式
+import React, { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../../assets/context/AuthContext';
+import './Home.css';
 
-// 定義 Home 函數組件
 function Home() {
+    const { user, setUser } = useContext(AuthContext); // 從 AuthContext 中獲取 user 和 setUser
+    const navigate = useNavigate();
+
+    console.log("Current user state:", user); // 用於調試
+
+    const fetchUserFromToken = async (token) => {
+        try {
+            const response = await fetch('/api/auth/user', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                const userData = await response.json();
+                console.log("Fetched user data:", userData); // 用於調試
+                setUser(userData); // 使用 setUser 設置 user 狀態
+            } else {
+                console.error('無法獲取用戶信息');
+                setUser(null);
+            }
+        } catch (error) {
+            console.error('獲取用戶信息失敗:', error);
+            setUser(null);
+        }
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            fetchUserFromToken(token);
+        } else {
+            navigate('/login');
+        }
+    }, [navigate]);
+
+    // 等待 `user` 加載完成後再渲染
+    if (!user || !user.username) {
+        return <div>載入中...</div>;
+    }
+
     return (
-        // 頂層容器，包含整個首頁內容
         <div className="home-container">
-            {/* 首頁標題 */}
-            <h1>歡迎來到 OneCRM</h1>
+            <h1>歡迎來到 OneCRM, {user.username}</h1>
             <p>請選擇下列功能來管理您的客戶資料</p>
 
-            {/* 卡片容器，包含多個導航卡片 */}
             <div className="home-cards">
-                {/* 客戶列表導航卡片 */}
                 <Link to="/customers" className="home-card">客戶列表</Link>
-
-                {/* 客戶分析導航卡片 */}
                 <Link to="/customer-analysis" className="home-card">客戶分析</Link>
-
-                {/* 保單管理導航卡片 */}
                 <Link to="/policy-management" className="home-card">保單管理</Link>
             </div>
         </div>
     );
 }
 
-// 將 Home 組件導出，以便在其他文件中引入並使用
 export default Home;

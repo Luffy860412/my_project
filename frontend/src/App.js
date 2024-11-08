@@ -8,21 +8,24 @@ import Home from './assets/pages/Home';
 import CustomerList from './assets/pages/CustomerList';
 import CustomerAnalysis from './assets/pages/CustomerAnalysis';
 import PolicyManagement from './assets/pages/PolicyManagement';
+import AuthContext, { AuthProvider } from './assets/context/AuthContext'; // 引入 AuthProvider 和 AuthContext
 import './assets/styles/global.css';
 
 // 主應用程序組件
 function App() {
     return (
-        <Router>
-            <AppContent />
-        </Router>
+        <AuthProvider>
+            <Router>
+                <AppContent />
+            </Router>
+        </AuthProvider>
     );
 }
 
 // 定義內容組件，根據路徑動態顯示或隱藏 Sidebar 和 Header
 function AppContent() {
     const location = useLocation(); // 使用 useLocation 獲取當前路徑
-    const isAuthPage = location.pathname === '/' || location.pathname === '/signup'; // 判斷是否為登入或註冊頁面
+    const isAuthPage = ['/login', '/signup', '/'].includes(location.pathname); // 判斷是否為認證頁面
 
     return (
         <div className="app-container flex h-screen">

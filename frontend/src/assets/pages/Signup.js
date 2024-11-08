@@ -1,14 +1,14 @@
-import React, { useState } from 'react'; // 引入 React 和 useState
-import { Link, useNavigate } from 'react-router-dom'; // 引入 Link 和 useNavigate，用於路由導航
-import './Signup.css'; // 引入 Signup.css
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import './Signup.css';
 
 function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [error, setError] = useState(null); // 用於保存錯誤信息
-    const [successMessage, setSuccessMessage] = useState(null); // 用於顯示成功註冊信息
-    const navigate = useNavigate(); // 用於在成功註冊後重定向
+    const [error, setError] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
+    const navigate = useNavigate();
 
     // 註冊處理函數
     const handleSignup = async () => {

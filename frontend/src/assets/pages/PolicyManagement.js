@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../../assets/context/AuthContext';
 import './PolicyManagement.css';
 import AddPolicyModal from '../modals/AddPolicyModal';
 import EditPolicyModal from '../modals/EditPolicyModal';
@@ -7,29 +9,37 @@ function PolicyManagement() {
     const [policies, setPolicies] = useState([]);
     const [isAddModalOpen, setAddModalOpen] = useState(false);
     const [editPolicy, setEditPolicy] = useState(null);
+    const { user } = useContext(AuthContext); // 從 AuthContext 中獲取 user 狀態和 token
+    const navigate = useNavigate();
 
-    // 初次加載組件時獲取所有保單資料
     useEffect(() => {
-        fetchPolicies();
-    }, []);
+        if (!user) {
+            navigate('/login');
+            return;
+        }
 
-    // Helper function to handle fetch errors
-    const handleFetchError = (error) => {
-        console.error('API request failed:', error);
-        alert('無法完成操作，請稍後再試。');
-    };
+        if (user && user.token) {
+            fetchPolicies(user.token);
+        }
+    }, [user, navigate]);
 
-    // 從後端 API 獲取保單列表
-    const fetchPolicies = async () => {
+    // 獲取保單列表的函數
+    const fetchPolicies = async (token) => {
         try {
-            const token = localStorage.getItem('token');
             const response = await fetch('/api/policies', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });
-            if (!response.ok) throw new Error('Failed to fetch policies');
+            if (!response.ok) {
+                if (response.status === 401) {
+                    alert('您的會話已過期，請重新登錄');
+                    navigate('/login');
+                } else {
+                    throw new Error('Failed to fetch policies');
+                }
+            }
             const data = await response.json();
             setPolicies(data.policies || []);
         } catch (error) {
@@ -37,10 +47,10 @@ function PolicyManagement() {
         }
     };
 
-    // 添加新保單並發送到後端
+    // 添加保單的處理函數
     const handleAddPolicy = async (policy) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = user.token;
             const response = await fetch('/api/policies', {
                 method: 'POST',
                 headers: {
@@ -61,10 +71,10 @@ function PolicyManagement() {
         }
     };
 
-    // 更新保單信息
+    // 更新保單的處理函數
     const handleEditPolicy = async (updatedPolicy) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = user.token;
             const response = await fetch(`/api/policies/${updatedPolicy.id}`, {
                 method: 'PUT',
                 headers: {
@@ -85,10 +95,10 @@ function PolicyManagement() {
         }
     };
 
-    // 刪除保單並更新保單列表
+    // 刪除保單的處理函數
     const handleDeletePolicy = async (id) => {
         try {
-            const token = localStorage.getItem('token');
+            const token = user.token;
             const response = await fetch(`/api/policies/${id}`, {
                 method: 'DELETE',
                 headers: {
@@ -98,11 +108,18 @@ function PolicyManagement() {
             if (response.ok) {
                 setPolicies(policies.filter((p) => p.id !== id));
             } else {
+                alert('Failed to delete policy. Please try again later.');
                 throw new Error('Failed to delete policy');
             }
         } catch (error) {
             handleFetchError(error);
         }
+    };
+
+    // 通用的錯誤處理
+    const handleFetchError = (error) => {
+        console.error('API request failed:', error);
+        alert('無法完成操作，請稍後再試。');
     };
 
     return (
@@ -143,10 +160,12 @@ function PolicyManagement() {
                 </tbody>
             </table>
 
+            {/* 新增保單模態框 */}
             {isAddModalOpen && (
                 <AddPolicyModal onClose={() => setAddModalOpen(false)} onPolicyAdded={handleAddPolicy} />
             )}
 
+            {/* 編輯保單模態框 */}
             {editPolicy && (
                 <EditPolicyModal
                     policy={editPolicy}

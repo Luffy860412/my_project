@@ -1,0 +1,69 @@
+/* Signup.css - 定義註冊頁面的樣式 */
+
+/* 註冊頁面容器樣式 */
+.signup-container {
+    max-width: 400px;                  /* 最大寬度設置為400px */
+    margin: 50px auto;                 /* 上下間距50px，左右居中 */
+    padding: 20px;                     /* 內邊距20px */
+    background-color: #ffffff;         /* 背景色為白色 */
+    border-radius: 8px;                /* 圓角邊框設置為8px */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 設置陰影效果 */
+    text-align: center;                /* 文本居中對齊 */
+}
+
+/* 容器內標題樣式 */
+.signup-container h2 {
+    margin-bottom: 20px;               /* 底部外邊距20px */
+    color: #333;                       /* 標題文字顏色為深灰色 */
+}
+
+/* 表單樣式 */
+.signup-form {
+    display: flex;                     /* 使用 flex 布局 */
+    flex-direction: column;            /* 子項目垂直排列 */
+}
+
+/* 表單標籤樣式 */
+.signup-form label {
+    margin-bottom: 5px;                /* 底部外邊距5px */
+    font-weight: bold;                 /* 字體加粗 */
+    text-align: left;                  /* 左對齊 */
+}
+
+/* 表單輸入框樣式 */
+.signup-form input {
+    margin-bottom: 15px;               /* 底部外邊距15px */
+    padding: 10px;                     /* 內邊距10px */
+    font-size: 1rem;                   /* 字體大小設置為1rem */
+    border: 1px solid #ccc;            /* 灰色邊框 */
+    border-radius: 5px;                /* 圓角邊框設置為5px */
+}
+
+/* 註冊按鈕樣式 */
+.signup-button {
+    background-color: #28a745;         /* 按鈕背景色為綠色 */
+    color: #ffffff;                    /* 文字顏色為白色 */
+    padding: 10px;                     /* 內邊距10px */
+    border: none;                      /* 無邊框 */
+    border-radius: 5px;                /* 圓角邊框設置為5px */
+    cursor: pointer;                   /* 鼠標樣式為指針 */
+    transition: background-color 0.3s; /* 背景色變化動畫，持續0.3秒 */
+}
+
+/* 註冊按鈕懸停效果 */
+.signup-button:hover {
+    background-color: #218838;         /* 懸停時的背景色 */
+}
+
+/* 登入鏈接樣式 */
+.login-link {
+    margin-top: 10px;                  /* 頂部外邊距10px */
+    color: #007bff;                    /* 鏈接顏色為藍色 */
+    text-decoration: none;             /* 移除下劃線 */
+    transition: color 0.3s;            /* 顏色變化動畫，持續0.3秒 */
+}
+
+/* 登入鏈接懸停效果 */
+.login-link:hover {
+    color: #0056b3;                    /* 懸停時的顏色 */
+}

@@ -1,0 +1,73 @@
+/* PolicyManagement.css - 定義保單管理頁面的樣式 */
+
+.policy-management-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.policy-management-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.add-policy-button {
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+.add-policy-button:hover {
+    background-color: #218838;
+}
+
+.policy-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.policy-table th, .policy-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.policy-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.policy-table td button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.policy-table .edit-button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.policy-table .edit-button:hover {
+    background-color: #0056b3;
+}
+
+.policy-table .delete-button {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.policy-table .delete-button:hover {
+    background-color: #c82333;
+}

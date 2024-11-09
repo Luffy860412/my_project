@@ -1,0 +1,161 @@
+/* 設置頁面背景和通用文字樣式 */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 47.4% 11.2%;
+
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 47.4% 11.2%;
+
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 47.4% 11.2%;
+
+        --primary: 222.2 47.4% 11.2%;
+        --primary-foreground: 210 40% 98%;
+
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+
+        --destructive: 0 100% 50%;
+        --destructive-foreground: 210 40% 98%;
+
+        --ring: 215 20.2% 65.1%;
+
+        --radius: 0.5rem;
+    }
+
+    .dark {
+        --background: 224 71% 4%;
+        --foreground: 213 31% 91%;
+
+        --muted: 223 47% 11%;
+        --muted-foreground: 215.4 16.3% 56.9%;
+
+        --accent: 216 34% 17%;
+        --accent-foreground: 210 40% 98%;
+
+        --popover: 224 71% 4%;
+        --popover-foreground: 215 20.2% 65.1%;
+
+        --border: 216 34% 17%;
+        --input: 216 34% 17%;
+
+        --card: 224 71% 4%;
+        --card-foreground: 213 31% 91%;
+
+        --primary: 210 40% 98%;
+        --primary-foreground: 222.2 47.4% 1.2%;
+
+        --secondary: 222.2 47.4% 11.2%;
+        --secondary-foreground: 210 40% 98%;
+
+        --destructive: 0 63% 31%;
+        --destructive-foreground: 210 40% 98%;
+
+        --ring: 216 34% 17%;
+
+        --radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+}
+
+
+body {
+    font-family: Arial, sans-serif; /* 設置全局字體為Arial，備選為系統默認無襯線字體 */
+    background-color: #f5f5f5; /* 設置頁面背景色為淡灰色 */
+    margin: 0; /* 取消頁面的默認邊距 */
+    padding: 0; /* 取消頁面的默認內距 */
+    color: #333; /* 設置文字顏色為深灰色 */
+}
+
+/* 標題樣式，包括h1到h6 */
+h1, h2, h3, h4, h5, h6 {
+    color: #fff; /* 設置標題顏色為白色 */
+    margin: 0; /* 取消標題的默認外邊距 */
+    padding: 0.5em 0; /* 設置標題上下的內邊距 */
+}
+
+/* 通用容器樣式，用於限制內容寬度並居中對齊 */
+.container {
+    width: 90%; /* 設置容器寬度為90% */
+    max-width: 1200px; /* 設置最大寬度為1200px */
+    margin: 0 auto; /* 將容器水平居中 */
+    padding: 20px; /* 設置容器內部邊距 */
+}
+
+/* 通用按鈕樣式 */
+button {
+    font-size: 1rem; /* 設置按鈕文字大小 */
+    padding: 10px 20px; /* 設置按鈕內部邊距，增加可點擊區域 */
+    border: none; /* 去除按鈕邊框 */
+    border-radius: 5px; /* 設置按鈕圓角 */
+    cursor: pointer; /* 鼠標懸停時顯示手指圖標 */
+}
+
+/* 編輯按鈕樣式 */
+.edit-button {
+    background-color: #28a745; /* 設置背景色為綠色 */
+    color: #fff; /* 設置文字顏色為白色 */
+}
+
+/* 刪除按鈕樣式 */
+.delete-button {
+    background-color: #dc3545; /* 設置背景色為紅色 */
+    color: #fff; /* 設置文字顏色為白色 */
+}
+
+/* 通用的卡片樣式 */
+.card {
+    background-color: #fff; /* 卡片背景為白色 */
+    border-radius: 8px; /* 設置卡片的圓角 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 設置卡片的陰影，讓卡片看起來有浮動感 */
+    padding: 20px; /* 設置卡片內部邊距 */
+    margin-bottom: 20px; /* 在卡片之間添加一些外邊距 */
+}
+
+
+.page-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}

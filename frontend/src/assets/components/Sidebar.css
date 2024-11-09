@@ -1,0 +1,60 @@
+.sidebar {
+    width: 250px;            /* 預設側邊欄的寬度為 250px */
+    height: 100vh;           /* 設置側邊欄高度為 100% 的視口高度，使其填滿整個頁面高度 */
+    background-color: #343a40; /* 設置側邊欄的背景顏色為淡灰色 */
+    transition: width 0.3s ease; /* 寬度變化時添加平滑過渡效果，持續 0.3 秒 */
+    overflow-x: hidden;      /* 隱藏水平溢出的內容，防止在折疊時出現橫向滾動條 */
+}
+
+.sidebar.collapsed {
+    width: 60px;             /* 折疊狀態下的側邊欄寬度為 60px，僅顯示圖標 */
+}
+
+.sidebar-header {
+    display: flex;                     /* 使用 flex 布局，讓子元素水平排列 */
+    justify-content: space-between;     /* 將子元素水平兩端對齊，空間均分 */
+    align-items: center;                /* 垂直居中對齊子元素 */
+    height: 80px;                       /* 設置高度為 80px，與頂欄的高度一致 */
+    padding: 1rem;                      /* 設置內邊距為 1rem，給內容增加空間 */
+    box-sizing: border-box;             /* 使用 border-box 模型，使內邊距和邊框不會改變元素總高度 */
+}
+
+
+.sidebar-header .sidebar-toggle {
+    background: none !important;       /* 無背景 */
+    border: none !important;           /* 無邊框 */
+    cursor: pointer;                   /* 鼠標懸停時顯示手指樣式 */
+    padding: 0 !important;             /* 清除全局樣式的內邊距 */
+    font-size: 1.25rem !important;     /* 設定特定大小 */
+    display: flex;                     /* 方便內部圖標對齊 */
+    align-items: center;               /* 圖標垂直居中 */
+    justify-content: center;           /* 圖標水平居中 */
+}
+
+
+.sidebar-nav {
+    padding: 1rem 0; /* 為側邊欄的導航區域設置上下各 1rem 的內邊距，使導航項目與邊界有間距 */
+}
+
+.sidebar-item {
+    display: flex;               /* 使用 flex 排版，使圖標和文字水平對齊 */
+    align-items: center;         /* 垂直居中對齊圖標和文字 */
+    padding: 0.5rem 1rem;        /* 設置導航項目的內邊距，增強可點擊區域 */
+    color: #ffffff;              /* 設置導航項目的文字顏色為白色 */
+    text-decoration: none;       /* 去除導航項目的默認下劃線 */
+    transition: background-color 0.2s; /* 背景色在變化時添加平滑過渡，持續 0.2 秒 */
+}
+
+.sidebar-item:hover {
+    background-color: #e9ecef; /* 當鼠標懸停在導航項目上時，背景色變為淡灰色以突出顯示 */
+}
+
+.sidebar-icon {
+    width: 20px;               /* 設置圖標的寬度為 20px */
+    height: 20px;              /* 設置圖標的高度為 20px */
+    margin-right: 10px;        /* 在圖標與文字之間設置 10px 的間距，避免二者緊貼 */
+}
+
+.hidden {
+    display: none; /* 隱藏元素，適用於折疊側邊欄時隱藏文本等 */
+}

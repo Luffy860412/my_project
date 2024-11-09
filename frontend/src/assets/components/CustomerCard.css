@@ -1,0 +1,69 @@
+/* CustomerCard.css - 定義客戶卡片的樣式 */
+
+.customer-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, border-left 0.3s ease;
+}
+
+/* 狀態為 active 的客戶卡片樣式 */
+.customer-card.active {
+    border-left: 5px solid #28a745;
+    background-color: #f0fff4;
+}
+
+/* 狀態為 inactive 的客戶卡片樣式 */
+.customer-card.inactive {
+    border-left: 5px solid #dc3545;
+    background-color: #fff5f5;
+}
+
+.customer-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.customer-card p {
+    margin: 10px 0;
+    color: #555;
+}
+
+/* 動作按鈕容器 */
+.customer-card-actions {
+    margin-top: 15px;
+}
+
+/* 按鈕樣式 */
+.customer-card-actions button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+/* 編輯按鈕 */
+.edit-button {
+    background-color: #28a745;
+    color: #ffffff;
+    margin-right: 10px;
+}
+
+.edit-button:hover {
+    background-color: #218838;
+}
+
+/* 刪除按鈕 */
+.delete-button {
+    background-color: #dc3545;
+    color: #ffffff;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}

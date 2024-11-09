@@ -1,0 +1,9 @@
+Flask==2.1.1
+Flask-SQLAlchemy==2.5.1
+Flask-Migrate==3.1.0
+SQLAlchemy==1.4.32
+PyJWT==2.3.0
+psycopg2-binary==2.9.3  # 如果你使用 PostgreSQL 作為數據庫，根據實際需求可以選擇其他驅動，如 pymysql 等
+mysqlclient==2.1.0  # 如果你使用 MySQL 作為數據庫
+python-dotenv==0.19.2  # 如果你需要從 .env 文件中加載配置
+Werkzeug==2.1.1

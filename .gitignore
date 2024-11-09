@@ -1,0 +1,39 @@
+# 忽略 Node.js 項目的依賴文件夾
+node_modules/
+# 忽略 Yarn Plug’n’Play (PnP) 的配置文件（用來管理依賴的一種方式）
+/.pnp
+# 忽略 Yarn Plug’n’Play (PnP) 的配置文件（用來管理依賴的一種方式）
+.pnp.js
+
+# 忽略測試覆蓋率報告資料夾
+/coverage
+
+# 忽略編譯或生產環境生成的文件。
+/build
+
+# 忽略 .env 文件（存放敏感資訊或環境設定）。
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 忽略除錯日誌文件。
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 忽略 Node.js 項目的外部依賴文件夾
+node_modules/
+
+# Build files
+frontend/build/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+
+# WebStorm project files
+.idea/
+
+# Lock files
+package-lock.json

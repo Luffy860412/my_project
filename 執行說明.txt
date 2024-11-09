@@ -1,0 +1,140 @@
+更新前端代碼
+cd C:\Users\student\Downloads\my_project\frontend
+npm run build
+-----------------------------------
+啟動 Flask 服務器
+flask run
+-----------------------------------
+更新Git
+
+git add .
+
+git commit -m "描述此次更改的訊息"
+-----------------------------------
+將更新的Git提交到GitHub
+
+1.在 WebStorm 中，點擊右上角的 Git > Push
+
+2.在彈出的 Push 視窗中，確保分支是 master（或者 main，具體取決於你的分支名稱），並且遠端顯示為 origin。
+
+3.點擊 Push 按鈕。WebStorm 會將你的提交推送到 GitHub
+
+4.推送完成後，可以打開 GitHub 儲存庫，刷新頁面確認本地的提交是否出現在 GitHub 上。
+-----------------------------------
+將GitHub上的Git同步到本地
+
+1.點擊 Git > Pull，選擇 origin 和分支名（如 main）。
+
+2.點擊 Pull 按鈕，這樣 WebStorm 會將 GitHub 上的更新拉取到本地。
+-----------------------------------
+返回前一個（或指定）的本地Git版本
+
+1.點擊 Git > Show Git Log
+
+2.選擇Git版本按鈕
+
+3.
+一、進入分離的 HEAD 狀態
+1.右鍵點擊 Checkout Revision
+
+二、確認重置當前分支到該版本
+1.右鍵點擊 Reset Current Branch to Here
+2.選擇 HEAD 重置模式（
+Soft 重置：保留工作區和暫存區的更改，但僅將 HEAD 移動到指定版本。
+Mixed 重置：保留工作區的更改，但移除暫存區的更改。
+Hard 重置：完全將 HEAD、工作區、暫存區全部回退到指定版本。）
+
+三、基於該版本創建新分支
+1.右鍵點擊 New Branch from Revision
+2.命名新分支，例如 first-version-branch
+-----------------------------------
+切換Branches（分支）
+
+1.點擊 Git > Branches...
+
+2.選擇 Local（本地分支）或是 Remote（遠端分支）
+-----------------------------------
+設置環境變數（如果用flask run 出現404）
+set FLASK_APP=run.py
+-----------------------------------
+python run.py
+
+http://127.0.0.1:5000
+-----------------------------------
+數據庫遷移（這樣在模型做的任何架構都會直接改變到資料庫中）
+cd C:\Users\student\Downloads\my_project\backend
+初始化遷移（做一次就好）
+flask db init
+生成遷移文件（做一次就好）
+flask db migrate -m "Add occupation field to Customer model"
+
+flask db migrate -m "Add user_id to policies"
+應用遷移
+flask db upgrade
+-----------------------------------
+打包前端
+1. 進入前端項目目錄
+cd path/to/your/project/frontend
+
+2. 安裝前端依賴（如果尚未安裝，根據 package.json 中的配置安裝）
+npm install
+
+3. 執行打包命令（根據 package.json 中的 build 腳本打包）
+npm run build
+
+4. 使用 Flask 提供靜態資源
+確保 Flask 的 static_folder 配置指向這個 build 文件夾
+run.py
+app = Flask(__name__, static_folder='../frontend/build')
+
+-----------------------------------
+11/7
+前端安裝 lucide-react （為了使用它的圖標）
+
+npm install lucide-react
+
+----------------
+
+前端添加插件 devDependencies
+
+cd C:\Users\student\Downloads\my_project\frontend\src\assets\components
+
+npm install --save-dev @babel/plugin-proposal-private-property-in-object
+
+----------------
+
+配置 ShadCN（以便安裝 shadcn/ui 庫）
+
+cd C:\Users\student\Downloads\my_project\frontend
+
+npm install -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
+
+----------------
+
+配置 ShadCN（以便安裝 shadcn/ui 庫）
+
+----------------
+安裝 shadcn/ui 庫（以便使用相關組件）
+
+cd C:\Users\student\Downloads\my_project\frontend
+
+npx shadcn@latest init
+
+npx shadcn@latest add button
+
+npx shadcn@latest add scroll-area
+
+--------------------------------
+設置 FLASK_APP 環境變量
+由於您的應用程式是通過 run.py 中的 create_app() 函數創建的，您需要讓 Flask 知道使用這個函數來創建應用程式
+
+set FLASK_APP=run.py:create_app
+
+這條命令告訴 Flask 從 run.py 中導入 create_app 函數，並使用它來創建應用程式。
+
+--------------------------------
+找不到 jwt 模組
+
+pip install PyJWT
